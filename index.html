@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo 2026 | Pipocas Leão Gourmet</title>
   <meta name="description"
-    content="As mais deliciosas da vida! Pipocas gourmet, algodão-doce e kits personalizados para festas, eventos e presentes. Feito com carinho por Sandra Leão.">
+    content="Catálogo 2026 de Sandra Leão. Pipocas gourmet, algodão-doce, doces, carrinhos gourmet e serviços para eventos em Maceió.">
 
   <!-- Favicon -->
   <link rel="icon"
@@ -19,7 +19,7 @@
     href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2026">
 </head>
 
 <body>
@@ -45,7 +45,7 @@
       <div class="brand-badge">
         <span class="badge-popcorn">🍿</span>
         <div class="brand-text">
-          <span class="brand-tag">Catálogo 2025</span>
+          <span class="brand-tag">Catálogo 2026</span>
           <span class="brand-name">Pipocas Leão Gourmet</span>
         </div>
       </div>
@@ -55,13 +55,13 @@
         <a href="#catalogo" class="nav-link" data-cat="Pipocas">Pipocas</a>
         <a href="#catalogo" class="nav-link" data-cat="Algodão-doce">Algodão-doce</a>
         <a href="#catalogo" class="nav-link" data-cat="Kits">Kits</a>
-        <a href="#catalogo" class="nav-link" data-cat="Personalizados">Personalizados</a>
+        <a href="#catalogo" class="nav-link" data-cat="Máquinas e serviços">Serviços</a>
         <a href="#pagamento" class="nav-link">Pagamento</a>
         <a href="#contato" class="nav-link">Contato</a>
       </nav>
 
       <div class="header-actions">
-        <button class="btn-poster-view" id="openPosterBtn" title="Ver Capa Original do Catálogo">
+        <button type="button" class="btn-poster-view" id="openPosterBtn" aria-haspopup="dialog" title="Ver capa original do catálogo">
           <span>🖼️</span> Capa
         </button>
         <button class="cart-trigger-btn" id="headerCartBtn" aria-label="Abrir Carrinho">
@@ -82,16 +82,15 @@
       <div class="hero-icon-wrapper">
         <span class="hero-popcorn-icon">🍿</span>
       </div>
-      <h1 class="hero-title">CATÁLOGO 2025</h1>
+      <h1 class="hero-title">CATÁLOGO 2026</h1>
       <h2 class="hero-subtitle">Pipocas Leão Gourmet</h2>
       <p class="hero-description">
-        As mais deliciosas da vida! 🍿 Pipocas gourmet, algodão-doce e kits personalizados para festas, eventos e
-        presentes. Feito com carinho por <strong>Sandra Leão</strong>.
+        Pipocas tradicionais e gourmet, algodão-doce, carrinhos e serviços para festas e eventos em Maceió, com <strong>Sandra Leão</strong>.
       </p>
 
       <div class="hero-cta-group">
         <a href="#catalogo" class="btn btn-teal btn-lg">
-          Ver produtos 🍿
+          Ver catálogo 🍿
         </a>
         <button class="btn btn-pink btn-lg" id="heroOrderBtn">
           Fazer pedido 🛒
@@ -112,31 +111,36 @@
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
-        <input type="text" id="searchInput" placeholder="Buscar produto (ex: cone, pote, algodão-doce, ninho)..."
-          aria-label="Buscar produto" autocomplete="off">
+        <input type="text" id="searchInput" placeholder="Buscar produto ou serviço (ex.: cone, crepe, cama elástica)"
+          aria-label="Buscar produto ou serviço" autocomplete="off">
         <button class="btn-clear-search" id="clearSearchBtn" aria-label="Limpar busca" style="display: none;">✕</button>
       </div>
     </div>
 
-    <div class="category-pills-wrapper">
-      <button class="pill-btn active" data-category="Todos">Todos</button>
-      <button class="pill-btn" data-category="Pipocas">Pipocas</button>
-      <button class="pill-btn" data-category="Algodão-doce">Algodão-doce</button>
-      <button class="pill-btn" data-category="Kits">Kits</button>
-      <button class="pill-btn" data-category="Personalizados">Personalizados</button>
+    <div class="category-pills-wrapper" role="group" aria-label="Categorias do catálogo">
+      <button type="button" class="pill-btn active" data-category="Todos" aria-pressed="true">Todos</button>
+      <button type="button" class="pill-btn" data-category="Pipocas" aria-pressed="false">Pipocas</button>
+      <button type="button" class="pill-btn" data-category="Algodão-doce" aria-pressed="false">Algodão-doce</button>
+      <button type="button" class="pill-btn" data-category="Doces" aria-pressed="false">Doces</button>
+      <button type="button" class="pill-btn" data-category="Kits" aria-pressed="false">Kits</button>
+      <button type="button" class="pill-btn" data-category="Personalizados" aria-pressed="false">Personalizados</button>
+      <button type="button" class="pill-btn" data-category="Máquinas e serviços" aria-pressed="false">Máquinas e serviços</button>
+      <button type="button" class="pill-btn" data-category="Carrinhos gourmet" aria-pressed="false">Carrinhos gourmet</button>
+      <button type="button" class="pill-btn" data-category="Brinquedos" aria-pressed="false">Brinquedos</button>
+      <button type="button" class="pill-btn" data-category="Outros serviços" aria-pressed="false">Outros serviços</button>
     </div>
   </section>
 
   <!-- Flavors Showcase Banner -->
   <section class="flavors-banner-section container">
-    <div class="flavors-banner-card" id="openFlavorsModalCard">
+    <div class="flavors-banner-card">
       <div class="flavors-banner-content">
         <span class="party-emoji">🎉</span>
-        <h3 class="flavors-banner-title">+20 Sabores de Pipocas Gourmet!</h3>
+        <h3 class="flavors-banner-title">16 sabores de pipoca</h3>
         <p class="flavors-banner-desc">
-          Tradicional, caramelo artesanal, chocolate belga, leite ninho, morango, ninho com nutella e muito mais!
+          Escolha entre 12 sabores doces e 4 salgados.
         </p>
-        <button class="btn btn-teal-outline btn-sm">
+        <button type="button" class="btn btn-teal-outline btn-sm" id="openFlavorsModalBtn" aria-haspopup="dialog">
           Ver lista de sabores 📋
         </button>
       </div>
@@ -149,9 +153,9 @@
   <!-- Products Catalog Grid -->
   <main class="products-catalog-section container">
     <div class="catalog-header-info">
-      <div class="results-count" id="resultsCount">Carregando catálogo...</div>
+      <div class="results-count" id="resultsCount" role="status">Carregando catálogo...</div>
       <div class="catalog-tips">
-        <span class="tip-dot"></span> Escolha a variação e clique em adicionar
+        <span class="tip-dot"></span> Encomende produtos ou consulte a disponibilidade de serviços
       </div>
     </div>
 
@@ -163,9 +167,9 @@
     <!-- Empty State -->
     <div class="empty-state" id="emptyState" style="display: none;">
       <div class="empty-icon">🔍</div>
-      <h3>Nenhum produto encontrado</h3>
+      <h3>Nenhum resultado encontrado</h3>
       <p>Tente buscar por outro termo ou selecione a categoria "Todos".</p>
-      <button class="btn btn-teal" id="resetFiltersBtn">Ver todos os produtos</button>
+      <button class="btn btn-teal" id="resetFiltersBtn">Ver catálogo completo</button>
     </div>
   </main>
 
@@ -179,12 +183,12 @@
       </div>
       <h3 class="section-card-title">Formas de Pagamento</h3>
       <p class="payment-card-text">
-        Aceitamos <strong>cartões de débito e crédito (em até 12 vezes)</strong>. Também aceitamos <strong>Pix</strong>,
-        depósito ou transferência bancária. Temos a opção de pagamento através de maquininha, com juros repassados pela
-        própria operadora. Consultar valores para pagamento no cartão de débito.
+        Os valores promocionais do catálogo valem para pagamento em <strong>dinheiro, Pix, depósito ou transferência</strong>.
+        No cartão de crédito, o comprador pode parcelar em até <strong>12 vezes pelo Mercado Pago</strong>, com juros fixos informados pela operadora.
+        Consulte os valores para pagamento no cartão de débito.
       </p>
       <div class="payment-badges">
-        <span class="pay-badge"><span class="badge-icon">⚡</span> Pix Imediato</span>
+        <span class="pay-badge"><span class="badge-icon">⚡</span> Pix e dinheiro</span>
         <span class="pay-badge"><span class="badge-icon">💳</span> Cartão até 12x</span>
         <span class="pay-badge"><span class="badge-icon">🏦</span> Transferência</span>
       </div>
@@ -205,11 +209,11 @@
           </div>
         </a>
 
-        <a href="https://instagram.com/pipocasleo" target="_blank" rel="noopener noreferrer" class="contact-item">
+        <a href="https://instagram.com/pipocasleao" target="_blank" rel="noopener noreferrer" class="contact-item">
           <span class="contact-icon insta-icon">📸</span>
           <div class="contact-meta">
             <span class="contact-label">Instagram</span>
-            <span class="contact-value">@pipocasleo</span>
+            <span class="contact-value">@pipocasleao</span>
           </div>
         </a>
 
@@ -220,10 +224,26 @@
             <span class="contact-value">Sandra Leão</span>
           </div>
         </div>
+
+        <div class="contact-item">
+          <span class="contact-icon phone-icon" aria-hidden="true">📍</span>
+          <div class="contact-meta">
+            <span class="contact-label">Retirada com data e horário combinados</span>
+            <span class="contact-value">Loteamento Canto da Sereia, Rua Boca do Rio, lote 2 A, Riacho Doce, Maceió–AL, 57039-200</span>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-icon insta-icon" aria-hidden="true">🚚</span>
+          <div class="contact-meta">
+            <span class="contact-label">Entregas</span>
+            <span class="contact-value">Consulte a taxa pelo WhatsApp informando o endereço.</span>
+          </div>
+        </div>
       </div>
 
       <div class="contact-action-box">
-        <a href="https://wa.me/5582988783636?text=Ol%C3%A1%2C%20Sandra!%20Vim%20pelo%20Cat%C3%A1logo%202025%20e%20gostaria%20de%20tirar%20uma%20d%C3%BAvida."
+        <a href="https://wa.me/5582988783636?text=Ol%C3%A1%2C%20Sandra!%20Vim%20pelo%20Cat%C3%A1logo%202026%20e%20gostaria%20de%20tirar%20uma%20d%C3%BAvida."
           target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg">
           <svg class="whatsapp-svg" viewBox="0 0 24 24" fill="currentColor">
             <path
@@ -233,6 +253,23 @@
         </a>
       </div>
     </div>
+  </section>
+
+  <section class="references-section container" aria-label="Referências e empresas parceiras">
+    <details class="section-card references-card">
+      <summary>Referências e empresas parceiras</summary>
+      <div class="references-grid">
+        <a href="assets/images/catalogo-2026/referencias-1.webp">
+          <img src="assets/images/catalogo-2026/referencias-1.webp" alt="Carta de referência com empresas atendidas, incluindo Cesmac, Parque Shopping Maceió e Nissan" loading="lazy" width="1050" height="591">
+        </a>
+        <a href="assets/images/catalogo-2026/referencias-2.webp">
+          <img src="assets/images/catalogo-2026/referencias-2.webp" alt="Segunda carta de referência, com empresas como Arezzo, Smart Fit e Hering Kids" loading="lazy" width="1050" height="591">
+        </a>
+        <a href="assets/images/catalogo-2026/empresas-parceiras.webp">
+          <img src="assets/images/catalogo-2026/empresas-parceiras.webp" alt="Empresas parceiras da Pipocas Leão Gourmet" loading="lazy" width="1050" height="591">
+        </a>
+      </div>
+    </details>
   </section>
 
   <!-- Footer -->
@@ -260,7 +297,7 @@
 
   <!-- Cart Drawer (Off-Canvas) -->
   <div class="cart-drawer-overlay" id="cartOverlay"></div>
-  <aside class="cart-drawer" id="cartDrawer" aria-labelledby="cartDrawerTitle">
+  <aside class="cart-drawer" id="cartDrawer" aria-labelledby="cartDrawerTitle" inert>
     <div class="cart-drawer-header">
       <div class="cart-header-title-box">
         <span class="drawer-cart-icon">🛒</span>
@@ -270,6 +307,7 @@
     </div>
 
     <div class="cart-drawer-body">
+      <p id="cartCatalogNotice" class="cart-catalog-notice" hidden>Atualizamos os preços para 2026 e retiramos itens fora do catálogo ou dos lotes publicados. Revise seu carrinho antes de pedir.</p>
       <!-- Items Container -->
       <div class="cart-items-list" id="cartItemsList">
         <!-- Rendered by JS -->
@@ -300,14 +338,9 @@
         <div class="form-group">
           <label for="orderNotes">Sabores desejados ou Observações</label>
           <textarea id="orderNotes" rows="2"
-            placeholder="Ex: Ninho, Nutella, cor azul para festa infantil..."></textarea>
+            placeholder="Ex.: sabor Ninho ou 10 algodões-doces azuis e 10 rosas"></textarea>
         </div>
 
-        <!-- Minimum Order Alert Banner (if applicable) -->
-        <div class="min-order-alert" id="minOrderAlert" style="display: none;">
-          <span class="alert-icon">⚠️</span>
-          <span class="alert-text" id="minOrderAlertText"></span>
-        </div>
       </div>
     </div>
 
@@ -335,84 +368,77 @@
   </aside>
 
   <!-- Product Details Modal -->
-  <div class="modal-overlay" id="productModalOverlay">
+  <dialog class="modal-overlay" id="productModalOverlay" aria-labelledby="productModalTitle">
     <div class="modal-card">
-      <button class="modal-close-btn" id="closeProductModalBtn">✕</button>
-      <div class="modal-body" id="productModalBody">
-        <!-- Rendered by JS -->
-      </div>
+      <button type="button" class="modal-close-btn" aria-label="Fechar detalhes" data-close-dialog>✕</button>
+      <div class="modal-body" id="productModalBody"></div>
     </div>
-  </div>
+  </dialog>
 
   <!-- Flavors List Modal -->
-  <div class="modal-overlay" id="flavorsModalOverlay">
+  <dialog class="modal-overlay" id="flavorsModalOverlay" aria-labelledby="flavorsModalTitle">
     <div class="modal-card flavors-modal-card">
-      <button class="modal-close-btn" id="closeFlavorsModalBtn">✕</button>
+      <button type="button" class="modal-close-btn" aria-label="Fechar lista de sabores" data-close-dialog>✕</button>
       <div class="flavors-modal-content">
         <div class="modal-title-box">
-          <span class="modal-emoji">🍿</span>
-          <h3>+20 Sabores de Pipocas Gourmet</h3>
-          <p>Trabalhamos com ingredientes de primeira qualidade para garantir a maior crocância e sabor!</p>
+          <h3 id="flavorsModalTitle">16 sabores de pipoca</h3>
+          <p>Produção artesanal, com ingredientes de qualidade e sem conservantes.</p>
         </div>
 
         <div class="flavor-category-group">
-          <h4 class="flavor-group-heading">👑 Sabores Gourmet Nobres</h4>
-          <div class="flavor-tags-list">
-            <span class="flavor-tag">Leite Ninho</span>
-            <span class="flavor-tag">Nutella</span>
-            <span class="flavor-tag">Ninho com Nutella</span>
-            <span class="flavor-tag">Chocolate Belga ao Leite</span>
-            <span class="flavor-tag">Chocolate Meio Amargo</span>
-            <span class="flavor-tag">Morango com Chocolate Branco</span>
-            <span class="flavor-tag">Churros com Doce de Leite</span>
-            <span class="flavor-tag">Oreo / Cookies & Cream</span>
-            <span class="flavor-tag">Ovomaltine Crocante</span>
-            <span class="flavor-tag">Caramelo Salgado (Fleur de Sel)</span>
-            <span class="flavor-tag">Paçoca / Amendoim</span>
-            <span class="flavor-tag">Sensação (Morango + Chocolate)</span>
-            <span class="flavor-tag">Maracujá Gourmet</span>
-            <span class="flavor-tag">Limão Siciliano</span>
-            <span class="flavor-tag">Café Trufado</span>
-            <span class="flavor-tag">Frutas Vermelhas</span>
-          </div>
+          <h4 class="flavor-group-heading">12 sabores doces</h4>
+          <ul class="flavor-tags-list">
+            <li class="flavor-tag">Ovomaltine</li>
+            <li class="flavor-tag">Farinha Láctea</li>
+            <li class="flavor-tag">Nutella com Ninho</li>
+            <li class="flavor-tag">Chocolate</li>
+            <li class="flavor-tag">Churros</li>
+            <li class="flavor-tag">Caramelo</li>
+            <li class="flavor-tag">M&amp;M</li>
+            <li class="flavor-tag">Oreo</li>
+            <li class="flavor-tag">Ninho</li>
+            <li class="flavor-tag">Chocoball</li>
+            <li class="flavor-tag">Paçoca</li>
+            <li class="flavor-tag">Sonho de Valsa</li>
+          </ul>
         </div>
 
         <div class="flavor-category-group">
-          <h4 class="flavor-group-heading">✨ Sabores Caramelizados & Tradicionais</h4>
-          <div class="flavor-tags-list">
-            <span class="flavor-tag">Caramelo Dourado Artesanal</span>
-            <span class="flavor-tag">Caramelo com Coco Ralado</span>
-            <span class="flavor-tag">Pipoca Doce Colorida (Vermelha, Azul, Rosa)</span>
-            <span class="flavor-tag">Tradicional Doce de Cinema</span>
-          </div>
+          <h4 class="flavor-group-heading">4 sabores salgados</h4>
+          <ul class="flavor-tags-list">
+            <li class="flavor-tag">Tradicional</li>
+            <li class="flavor-tag">Temperada</li>
+            <li class="flavor-tag">Parmesão</li>
+            <li class="flavor-tag">Chimichurri</li>
+          </ul>
         </div>
 
         <div class="flavor-modal-footer">
-          <button class="btn btn-teal" id="closeFlavorsModalActionBtn">Entendido, quero escolher!</button>
+          <button type="button" class="btn btn-teal" data-close-dialog>Voltar ao catálogo</button>
         </div>
       </div>
     </div>
-  </div>
+  </dialog>
 
-  <!-- Canva Poster View Modal -->
-  <div class="modal-overlay" id="posterModalOverlay">
+  <!-- Cover Modal -->
+  <dialog class="modal-overlay" id="posterModalOverlay" aria-labelledby="posterModalTitle">
     <div class="modal-card poster-modal-card">
-      <button class="modal-close-btn" id="closePosterModalBtn">✕</button>
+      <button type="button" class="modal-close-btn" aria-label="Fechar capa" data-close-dialog>✕</button>
       <div class="poster-modal-body">
-        <h3 class="poster-title">Capa Original do Catálogo 2025</h3>
-        <p class="poster-sub">Pipocas Leão Gourmet — As mais deliciosas da vida</p>
+        <h3 class="poster-title" id="posterModalTitle">Capa do Catálogo 2026</h3>
         <div class="poster-image-container">
-          <img src="assets/images/poster_catalogo_2025.png" alt="Capa Catálogo 2025 Pipocas Leão Gourmet"
-            class="poster-full-img">
+          <img src="assets/images/catalogo-2026/capa.webp" alt="Capa do Catálogo 2026 das Pipocas Leão Gourmet"
+            class="poster-full-img" loading="lazy" width="1050" height="591">
         </div>
       </div>
     </div>
-  </div>
+  </dialog>
 
   <!-- Toast Notification Container -->
-  <div class="toast-container" id="toastContainer"></div>
+  <div class="toast-container" id="toastContainer" role="status"></div>
 
-  <script src="app.js"></script>
+  <script src="catalogo.js"></script>
+  <script src="app.js?v=2026"></script>
 </body>
 
 </html>

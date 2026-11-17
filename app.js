@@ -1,198 +1,4 @@
-/**
- * Pipocas Leão Gourmet - Catálogo 2025
- * Complete Interactive Catalog, Search, Filtering, Cart & WhatsApp Ordering
- */
-
-// ==========================================================================
-// 1. Catalog Products Data Model
-// ==========================================================================
-const CATALOG_PRODUCTS = [
-  {
-    id: 'pipoca-personalizada',
-    title: 'Pipoca Personalizada',
-    emoji: '🎁',
-    sizeLabel: 'Tamanho 10x10 cm',
-    category: 'Pipocas',
-    tags: ['Pipocas', 'Personalizados'],
-    image: 'assets/images/pipoca_personalizada.png',
-    minQuantity: 1,
-    minAlert: null,
-    isConsultation: false,
-    variations: [
-      { id: 'caramelizada', label: 'Caramelizada', price: 3.50, isGourmet: false },
-      { id: 'gourmet', label: 'Gourmet', price: 4.25, isGourmet: true }
-    ],
-    description: 'Pipoca doce super crocante embalada em saquinho 10x10cm com adesivo ou rótulo temático personalizado. Ideal para lembrancinhas de aniversários, eventos infantis e corporativos.',
-    flavorsHint: 'Disponível em Caramelo Artesanal ou Sabores Gourmet nobres (Ninho, Nutella, Chocolate Belga, Morango, etc.).'
-  },
-  {
-    id: 'pipoca-saborear-standup',
-    title: 'Pipoca para Saborear ou Presentear',
-    emoji: '🍿',
-    sizeLabel: 'Saco tipo zíper — Tamanhos P, M e G',
-    category: 'Pipocas',
-    tags: ['Pipocas'],
-    image: 'assets/images/pipoca_saborear.png',
-    minQuantity: 1,
-    minAlert: null,
-    isConsultation: false,
-    variations: [
-      { id: 'p-caram', label: 'P Caram. (R$ 7)', price: 7.00, isGourmet: false },
-      { id: 'p-gourmet', label: 'P Gourmet (R$ 8,50)', price: 8.50, isGourmet: true },
-      { id: 'm-caram', label: 'M Caram. (R$ 12)', price: 12.00, isGourmet: false },
-      { id: 'm-gourmet', label: 'M Gourmet (R$ 15)', price: 15.00, isGourmet: true },
-      { id: 'g-caram', label: 'G Caram. (R$ 18)', price: 18.00, isGourmet: false },
-      { id: 'g-gourmet', label: 'G Gourmet (R$ 22)', price: 22.00, isGourmet: true }
-    ],
-    description: 'Embalagem stand-up pouch laminada com fecho hermético zip lock que preserva a textura crocante por muito mais tempo. Perfeita para saborear a qualquer hora ou presentear com carinho.',
-    flavorsHint: 'Disponível em todos os +20 sabores gourmet e tradicionais.'
-  },
-  {
-    id: 'mini-pipoca-saco',
-    title: 'Mini Pipoca no Saco',
-    emoji: '🍿',
-    sizeLabel: 'Tamanho 10x15 cm',
-    category: 'Pipocas',
-    tags: ['Pipocas'],
-    image: 'assets/images/pipoca_mini_saco.png',
-    minQuantity: 1,
-    minAlert: null,
-    isConsultation: false,
-    variations: [
-      { id: 'tradicional', label: 'Trad. R$ 3,00', price: 3.00, isGourmet: false },
-      { id: 'gourmet', label: 'Gourmet R$ 3,25', price: 3.25, isGourmet: true }
-    ],
-    description: 'Saquinho compacto e charmoso com fita decorativa. Quantidade ideal para compor sacolinhas de brindes e mesas de doces.',
-    flavorsHint: 'Sabores caramelizados tradicionais ou gourmet.'
-  },
-  {
-    id: 'pipoca-saco-medio',
-    title: 'Pipoca no Saco',
-    emoji: '🍿',
-    sizeLabel: 'Tamanho 10x20 cm',
-    category: 'Pipocas',
-    tags: ['Pipocas'],
-    image: 'assets/images/pipoca_saco_medio.png',
-    minQuantity: 1,
-    minAlert: null,
-    isConsultation: false,
-    variations: [
-      { id: 'tradicional', label: 'Trad. R$ 4,00', price: 4.00, isGourmet: false },
-      { id: 'gourmet', label: 'Gourmet R$ 4,25', price: 4.25, isGourmet: true }
-    ],
-    description: 'Porção média equilibrada para lanches de festas, piqueniques escolares ou para matar a vontade com pipoca sempre fresquinha.',
-    flavorsHint: 'Tradicional caramelizada ou gourmet.'
-  },
-  {
-    id: 'pipoca-saco-cone',
-    title: 'Pipoca no Saco Cone',
-    emoji: '🍿',
-    sizeLabel: 'Tamanho 18x30 cm',
-    category: 'Pipocas',
-    tags: ['Pipocas'],
-    image: 'assets/images/pipoca_saco_cone.png',
-    minQuantity: 1,
-    minAlert: null,
-    isConsultation: false,
-    variations: [
-      { id: 'tradicional', label: 'Trad. R$ 5,00', price: 5.00, isGourmet: false },
-      { id: 'gourmet', label: 'Gourmet R$ 6,00', price: 6.00, isGourmet: true }
-    ],
-    description: 'Embalagem em formato triangular de cone transparente que realça a beleza das pipocas doces e caramelizadas, finalizada com um lindo laço de cetim.',
-    flavorsHint: 'Visual festivo lindo para fotos de mesa decorada.'
-  },
-  {
-    id: 'pipoca-pote',
-    title: 'Pipoca no Pote',
-    emoji: '🍿',
-    sizeLabel: 'Copo / Vaso / Pote 300 ml',
-    category: 'Pipocas',
-    tags: ['Pipocas'],
-    image: 'assets/images/pipoca_pote.png',
-    minQuantity: 1,
-    minAlert: null,
-    isConsultation: false,
-    variations: [
-      { id: 'tradicional', label: 'Trad. R$ 5,00', price: 5.00, isGourmet: false },
-      { id: 'gourmet', label: 'Gourmet R$ 6,00', price: 6.00, isGourmet: true }
-    ],
-    description: 'Pote rígido de 300 ml com tampa antivazamento. Confortável de segurar, protege as pipocas contra umidade e garante crocância irresistível.',
-    flavorsHint: 'Ideal para festas infantis e cinemas em casa.'
-  },
-  {
-    id: 'algodao-pote-300',
-    title: 'Algodão-doce no Pote 300 ml',
-    emoji: '🍭',
-    sizeLabel: 'Personalizado — ideal para lembrancinhas',
-    category: 'Algodão-doce',
-    tags: ['Algodão-doce', 'Personalizados'],
-    image: 'assets/images/algodao_pote_300.png',
-    minQuantity: 30,
-    minAlert: 'Pedido mínimo: 30 unidades.',
-    isConsultation: false,
-    variations: [
-      { id: 'sem-pers', label: 'Sem pers. R$ 3,50', price: 3.50, isGourmet: false },
-      { id: 'com-pers', label: 'Com pers. R$ 4,00', price: 4.00, isGourmet: true }
-    ],
-    description: 'Algodão-doce macio em camadas coloridas dentro de pote hermético de 300ml. Não murcha e dura muitos dias fechado! Acabamento com laço fino opcional (+R$ 1,00/un).',
-    flavorsHint: 'Cores personalizáveis de acordo com a paleta da sua festa.'
-  },
-  {
-    id: 'algodao-pote-400-bolha',
-    title: 'Algodão-doce Pote 400 ml — Tampa Bolha',
-    emoji: '🍭',
-    sizeLabel: 'Personalizado com tampa bolinha/domo',
-    category: 'Algodão-doce',
-    tags: ['Algodão-doce', 'Personalizados'],
-    image: 'assets/images/algodao_pote_400_bolha.png',
-    minQuantity: 15,
-    minAlert: 'Pedido mínimo: 15 unidades.',
-    isConsultation: false,
-    variations: [
-      { id: 'sem-pers', label: 'Sem pers. R$ 7,50', price: 7.50, isGourmet: false },
-      { id: 'com-pers', label: 'Com pers. R$ 8,00', price: 8.00, isGourmet: true }
-    ],
-    description: 'Modelo sofisticado com tampa bolha arredondada que acomoda uma generosa nuvem de algodão-doce. Dá um charme especial para lembrancinhas VIP. Laço fino opcional (+R$ 1,00/un).',
-    flavorsHint: 'Destaque visual volumoso e premium.'
-  },
-  {
-    id: 'algodao-casquinha',
-    title: 'Algodão-doce na Casquinha de Sorvete',
-    emoji: '🍦',
-    sizeLabel: 'Casquinha comestível crocante',
-    category: 'Algodão-doce',
-    tags: ['Algodão-doce'],
-    image: 'assets/images/algodao_casquinha.png',
-    minQuantity: 30,
-    minAlert: 'Pedido mínimo: 30 unidades.',
-    isConsultation: false,
-    variations: [
-      { id: 'padrao', label: 'R$ 5,50 a unidade', price: 5.50, isGourmet: true }
-    ],
-    description: 'Sensação entre as crianças! Uma deliciosa casquinha de sorvete de baunilha crocante encimada por nuvem colorida de algodão-doce, embalada individualmente com fita.',
-    flavorsHint: 'Cores suaves em azul, rosa, amarelo ou mesclado.'
-  },
-  {
-    id: 'kit-pipoca-algodao',
-    title: 'Kit Pipoca Gourmet + Algodão-doce',
-    emoji: '🎁',
-    sizeLabel: 'Kit Presente / Brinde / Lembrança',
-    category: 'Kits',
-    tags: ['Kits', 'Personalizados'],
-    image: 'assets/images/kit_presente.png',
-    minQuantity: 1,
-    minAlert: null,
-    isConsultation: true,
-    variations: [
-      { id: 'sob-consulta', label: 'Sob Consulta', price: 0, isGourmet: true }
-    ],
-    description: 'Kit especial montado em caixa ou sacola presenteável, combinando pipoca gourmet no pote + algodão-doce com sabor e cores combinadas com o tema da sua comemoração.',
-    flavorsHint: 'Montado sob medida com tags personalizadas e fitas especiais.'
-  }
-];
-
-// WhatsApp Business Number
-const WHATSAPP_PHONE = '5582988783636';
+// Interações, carrinho e pedidos do catálogo.
 
 // ==========================================================================
 // 2. Application State Management
@@ -202,7 +8,8 @@ const AppState = {
   searchQuery: '',
   selectedVariants: {}, // productId -> variationId
   selectedQuantities: {}, // productId -> number
-  cart: [] // Array of { productId, variantId, variantLabel, unitPrice, quantity, title, image, minQuantity }
+  selectedAddons: {},
+  cart: []
 };
 
 // ==========================================================================
@@ -212,16 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize default variations and quantities for each product
   CATALOG_PRODUCTS.forEach(product => {
     AppState.selectedVariants[product.id] = product.variations[0].id;
-    AppState.selectedQuantities[product.id] = product.minQuantity > 1 ? product.minQuantity : 1;
+    AppState.selectedQuantities[product.id] = 1;
+    AppState.selectedAddons[product.id] = [];
   });
-
-  // Load cart from LocalStorage if available
-  loadCartFromStorage();
 
   // Setup DOM Event Listeners
   setupEventListeners();
 
-  // Render Initial Catalog
+  loadCartFromStorage();
   renderProducts();
   updateCartUI();
 });
@@ -234,24 +39,28 @@ function setupEventListeners() {
   const pillButtons = document.querySelectorAll('.pill-btn');
   pillButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      pillButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      setActivePill(btn.dataset.category);
       AppState.currentCategory = btn.getAttribute('data-category');
       renderProducts();
     });
   });
 
+  function setActivePill(category) {
+    pillButtons.forEach(button => {
+      const active = button.dataset.category === category;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', active);
+    });
+  }
+
   // Header Nav Links with category filtering
   const navLinks = document.querySelectorAll('.nav-link[data-cat]');
   navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
+    link.addEventListener('click', () => {
       const cat = link.getAttribute('data-cat');
       if (cat) {
         AppState.currentCategory = cat;
-        // update pills
-        pillButtons.forEach(b => {
-          b.classList.toggle('active', b.getAttribute('data-category') === cat);
-        });
+        setActivePill(cat);
         renderProducts();
       }
     });
@@ -262,7 +71,7 @@ function setupEventListeners() {
   const clearSearchBtn = document.getElementById('clearSearchBtn');
 
   searchInput.addEventListener('input', (e) => {
-    AppState.searchQuery = e.target.value.trim().toLowerCase();
+    AppState.searchQuery = normalizeSearch(e.target.value.trim());
     clearSearchBtn.style.display = AppState.searchQuery ? 'flex' : 'none';
     renderProducts();
   });
@@ -283,13 +92,13 @@ function setupEventListeners() {
       AppState.currentCategory = 'Todos';
       searchInput.value = '';
       clearSearchBtn.style.display = 'none';
-      pillButtons.forEach(b => b.classList.toggle('active', b.getAttribute('data-category') === 'Todos'));
+      setActivePill('Todos');
       renderProducts();
     });
   }
 
   // Cart Drawer Triggers
-  const openCart = () => toggleCartDrawer(true);
+  const openCart = event => toggleCartDrawer(true, event.currentTarget);
   const closeCart = () => toggleCartDrawer(false);
 
   document.getElementById('headerCartBtn').addEventListener('click', openCart);
@@ -312,55 +121,89 @@ function setupEventListeners() {
   // WhatsApp Checkout Button
   document.getElementById('btnSendWhatsappOrder').addEventListener('click', handleWhatsAppCheckout);
 
-  // Flavors Modal Triggers
-  const flavorsModalOverlay = document.getElementById('flavorsModalOverlay');
-  const openFlavorsModalCard = document.getElementById('openFlavorsModalCard');
-  const closeFlavorsModalBtn = document.getElementById('closeFlavorsModalBtn');
-  const closeFlavorsModalActionBtn = document.getElementById('closeFlavorsModalActionBtn');
+  const dialogs = [
+    document.getElementById('flavorsModalOverlay'),
+    document.getElementById('posterModalOverlay'),
+    document.getElementById('productModalOverlay')
+  ];
+  const [flavorsDialog, posterDialog] = dialogs;
 
-  const openFlavorsModal = () => flavorsModalOverlay.classList.add('open');
-  const closeFlavorsModal = () => flavorsModalOverlay.classList.remove('open');
-
-  openFlavorsModalCard.addEventListener('click', openFlavorsModal);
-  closeFlavorsModalBtn.addEventListener('click', closeFlavorsModal);
-  closeFlavorsModalActionBtn.addEventListener('click', closeFlavorsModal);
-  flavorsModalOverlay.addEventListener('click', (e) => {
-    if (e.target === flavorsModalOverlay) closeFlavorsModal();
+  document.getElementById('openFlavorsModalBtn').addEventListener('click', (event) => {
+    openCatalogDialog(flavorsDialog, event.currentTarget);
+  });
+  document.getElementById('openPosterBtn').addEventListener('click', (event) => {
+    openCatalogDialog(posterDialog, event.currentTarget);
   });
 
-  // Poster Modal Triggers
-  const posterModalOverlay = document.getElementById('posterModalOverlay');
-  const openPosterBtn = document.getElementById('openPosterBtn');
-  const closePosterBtn = document.getElementById('closePosterModalBtn');
-
-  const openPosterModal = () => posterModalOverlay.classList.add('open');
-  const closePosterModal = () => posterModalOverlay.classList.remove('open');
-
-  openPosterBtn.addEventListener('click', openPosterModal);
-  closePosterBtn.addEventListener('click', closePosterModal);
-  posterModalOverlay.addEventListener('click', (e) => {
-    if (e.target === posterModalOverlay) closePosterModal();
+  dialogs.forEach(dialog => {
+    dialog.querySelectorAll('[data-close-dialog]').forEach(button => {
+      button.addEventListener('click', () => closeCatalogDialog(dialog));
+    });
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) closeCatalogDialog(dialog);
+    });
+    dialog.addEventListener('cancel', event => {
+      event.preventDefault();
+      closeCatalogDialog(dialog);
+    });
   });
 
-  // Product Details Modal Close
-  const productModalOverlay = document.getElementById('productModalOverlay');
-  const closeProductModalBtn = document.getElementById('closeProductModalBtn');
-  const closeProductModal = () => productModalOverlay.classList.remove('open');
-
-  closeProductModalBtn.addEventListener('click', closeProductModal);
-  productModalOverlay.addEventListener('click', (e) => {
-    if (e.target === productModalOverlay) closeProductModal();
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !dialogs.some(dialog => dialog.open)) closeCart();
   });
+}
 
-  // Close modals on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeCart();
-      closeFlavorsModal();
-      closePosterModal();
-      closeProductModal();
-    }
-  });
+let catalogDialogTrigger;
+
+function openCatalogDialog(dialog, trigger) {
+  catalogDialogTrigger = trigger;
+  dialog.showModal();
+}
+
+function closeCatalogDialog(dialog) {
+  dialog.close();
+  catalogDialogTrigger?.focus({ preventScroll: true });
+}
+
+const currency = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+
+function formatPrice(amount) {
+  return currency.format(amount);
+}
+
+function normalizeSearch(text) {
+  return text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+function productImage(product) {
+  return `assets/images/catalogo-2026/${product.image}.webp`;
+}
+
+function packQuantity(product, variant) {
+  return variant.quantity ?? product.packQuantity;
+}
+
+function priceLabel(product, variant) {
+  const pack = packQuantity(product, variant);
+  return pack ? `lote de ${pack} unidades` : variant.priceLabel ?? product.priceLabel ?? 'por unidade';
+}
+
+function selectedAddons(product) {
+  return (product.addons ?? []).filter(addon => AppState.selectedAddons[product.id].includes(addon.id));
+}
+
+function priceWithAddons(variant, addons) {
+  return variant.price + addons.reduce((total, addon) => total + addon.price, 0);
+}
+
+function whatsappLink(message) {
+  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
+}
+
+function consultationLink(product, variant, largerOrder = false) {
+  const subject = largerOrder ? 'um orçamento para uma quantidade maior' : 'disponibilidade e condições';
+  const option = product.variations.length > 1 ? ` (${variant.label})` : '';
+  return whatsappLink(`Olá, Sandra! Vim pelo Catálogo ${CATALOG_YEAR} e gostaria de consultar ${subject} para: ${product.title}${option}.`);
 }
 
 // ==========================================================================
@@ -373,16 +216,19 @@ function renderProducts() {
 
   // Filter products based on Category and Search Query
   const filteredProducts = CATALOG_PRODUCTS.filter(product => {
-    const matchesCategory = AppState.currentCategory === 'Todos' || product.tags.includes(AppState.currentCategory);
-    
-    const searchTarget = `${product.title} ${product.description} ${product.sizeLabel} ${product.flavorsHint}`.toLowerCase();
-    const matchesSearch = !AppState.searchQuery || searchTarget.includes(AppState.searchQuery);
+    const categories = [product.category, ...(product.tags ?? [])];
+    if (product.addons?.some(addon => addon.id === 'personalizacao')) categories.push('Personalizados');
+    const matchesCategory = AppState.currentCategory === 'Todos' || categories.includes(AppState.currentCategory);
+    const searchTarget = [
+      product.title, product.description, product.sizeLabel, ...categories,
+      ...product.variations.map(variant => variant.label), ...(product.notes ?? [])
+    ].join(' ');
 
-    return matchesCategory && matchesSearch;
+    return matchesCategory && normalizeSearch(searchTarget).includes(AppState.searchQuery);
   });
 
   // Update Result Count
-  resultsCount.textContent = `Exibindo ${filteredProducts.length} ${filteredProducts.length === 1 ? 'produto' : 'produtos'}`;
+  resultsCount.textContent = `${filteredProducts.length} ${filteredProducts.length === 1 ? 'resultado' : 'resultados'}`;
 
   // Check Empty State
   if (filteredProducts.length === 0) {
@@ -393,141 +239,136 @@ function renderProducts() {
 
   emptyState.style.display = 'none';
 
-  // Render Cards HTML
-  grid.innerHTML = filteredProducts.map(product => {
-    const selectedVariantId = AppState.selectedVariants[product.id] || product.variations[0].id;
-    const selectedVariant = product.variations.find(v => v.id === selectedVariantId) || product.variations[0];
-    const currentQty = AppState.selectedQuantities[product.id] || (product.minQuantity > 1 ? product.minQuantity : 1);
+  grid.innerHTML = filteredProducts.map(renderProductCard).join('');
+}
 
-    // Format Price
-    const priceDisplay = product.isConsultation
-      ? 'Sob consulta'
-      : `R$ ${selectedVariant.price.toFixed(2).replace('.', ',')}`;
+function renderProductCard(product) {
+  const variant = product.variations.find(option => option.id === AppState.selectedVariants[product.id]);
+  const pack = packQuantity(product, variant);
+  const minimum = product.packQuantity ?? product.variations[0].quantity;
+  const addons = selectedAddons(product);
+  const variationsHtml = product.variations.length > 1 ? `
+    <div class="variations-group" role="group" aria-label="Opções de ${product.title}">
+      ${product.variations.map(option => `
+        <button type="button" class="variant-btn ${option.id === variant.id ? 'selected' : ''}"
+          aria-pressed="${option.id === variant.id}" data-variant-id="${option.id}"
+          onclick="selectProductVariant('${product.id}', '${option.id}')">${option.label}</button>
+      `).join('')}
+    </div>
+  ` : '';
 
-    // Variations buttons HTML
-    const variationsHtml = product.variations.length > 1
-      ? `
-        <div class="variations-selector-label">Opções:</div>
-        <div class="variations-group">
-          ${product.variations.map(variant => `
-            <button 
-              type="button" 
-              class="variant-btn ${variant.id === selectedVariantId ? 'selected' : ''} ${variant.isGourmet ? 'variant-gourmet' : ''}"
-              data-product-id="${product.id}"
-              data-variant-id="${variant.id}"
-              onclick="selectProductVariant('${product.id}', '${variant.id}')"
-            >
-              ${variant.label}
-            </button>
-          `).join('')}
+  const addonsHtml = product.addons && !product.isConsultation ? `
+    <fieldset class="product-addons">
+      <legend>Adicionais opcionais</legend>
+      ${product.addons.map(addon => `
+        <label><input type="checkbox" ${addons.includes(addon) ? 'checked' : ''}
+          onchange="toggleProductAddon('${product.id}', '${addon.id}', this.checked)">
+          <span>${addon.label} <strong>+ ${formatPrice(addon.price)}</strong></span>
+        </label>
+      `).join('')}
+    </fieldset>
+  ` : '';
+
+  const actionHtml = product.isConsultation ? `
+    <a href="${consultationLink(product, variant)}" class="btn-consult-whatsapp" target="_blank" rel="noopener noreferrer">
+      Consultar pelo WhatsApp
+    </a>
+  ` : `
+    ${pack ? '' : `
+      <div class="qty-control">
+        <button type="button" class="btn-qty" onclick="changeProductQty('${product.id}', -1)" aria-label="Diminuir quantidade">−</button>
+        <input type="text" class="qty-input" value="${AppState.selectedQuantities[product.id]}" readonly aria-label="Quantidade">
+        <button type="button" class="btn-qty" onclick="changeProductQty('${product.id}', 1)" aria-label="Aumentar quantidade">+</button>
+      </div>
+    `}
+    <button type="button" class="btn-add-to-cart" id="addBtn-${product.id}" onclick="addProductToCart('${product.id}')">
+      <span>${pack ? 'Adicionar lote' : '+ Adicionar'}</span>
+    </button>
+  `;
+
+  return `
+    <article class="product-card" id="card-${product.id}">
+      <div class="card-media">
+        <img src="${productImage(product)}" alt="" class="card-image" loading="lazy">
+        <span class="card-badge-category">${product.category}</span>
+        ${minimum ? `<span class="card-badge-min">Mín. ${minimum} un.</span>` : ''}
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">${product.title}</h3>
+        <p class="card-size-label">${product.sizeLabel}</p>
+        ${variationsHtml}
+        ${addonsHtml}
+        <div class="card-price-row" aria-live="polite">
+          <span class="current-price">${variant.price === undefined ? 'Sob consulta' : formatPrice(priceWithAddons(variant, addons))}</span>
+          ${variant.price === undefined ? '' : `<span class="price-subtext">${priceLabel(product, variant)}</span>`}
         </div>
-      `
-      : '';
-
-    // Action button: WhatsApp Consultation vs Add to Cart
-    const actionButtonHtml = product.isConsultation
-      ? `
-        <a 
-          href="https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(`Olá, Sandra! Gostaria de consultar sobre o ${product.title}.`)}"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn-consult-whatsapp"
-        >
-          <span>💬 Consultar WhatsApp</span>
-        </a>
-      `
-      : `
-        <div class="qty-control">
-          <button type="button" class="btn-qty" onclick="changeProductQty('${product.id}', -1)" aria-label="Diminuir quantidade">−</button>
-          <input type="text" class="qty-input" value="${currentQty}" readonly aria-label="Quantidade">
-          <button type="button" class="btn-qty" onclick="changeProductQty('${product.id}', 1)" aria-label="Aumentar quantidade">+</button>
-        </div>
-        <button 
-          type="button" 
-          class="btn-add-to-cart" 
-          id="addBtn-${product.id}"
-          onclick="addProductToCart('${product.id}')"
-        >
-          <span>+ Adicionar</span>
+        <p class="card-order-note" ${variant.note ? '' : 'hidden'}>${variant.note ?? ''}</p>
+        <button type="button" class="card-details-toggle" aria-haspopup="dialog" aria-label="Ver detalhes de ${product.title}" onclick="openProductDetailsModal('${product.id}', this)">
+          Ver detalhes
         </button>
-      `;
-
-    return `
-      <article class="product-card" id="card-${product.id}">
-        <div class="card-media">
-          <img src="${product.image}" alt="${product.title}" class="card-image" loading="lazy">
-          <span class="card-badge-category">${product.category}</span>
-          ${product.minAlert ? `<span class="card-badge-min">Mín: ${product.minQuantity} un.</span>` : ''}
-        </div>
-
-        <div class="card-body">
-          <h3 class="card-title">${product.emoji} ${product.title}</h3>
-          <p class="card-size-label">${product.sizeLabel}</p>
-
-          ${variationsHtml}
-
-          <div class="card-price-row">
-            <span class="current-price" id="priceDisplay-${product.id}">${priceDisplay}</span>
-            <span class="price-subtext">${product.isConsultation ? 'Preço sob medida' : 'unidade'}</span>
-          </div>
-
-          <button 
-            type="button" 
-            class="card-details-toggle" 
-            onclick="openProductDetailsModal('${product.id}')"
-          >
-            <span>ℹ️ Ver detalhes</span>
-          </button>
-
-          <div class="card-actions-row">
-            ${actionButtonHtml}
-          </div>
-        </div>
-      </article>
-    `;
-  }).join('');
+        <div class="card-actions-row">${actionHtml}</div>
+        ${pack ? `
+          <a href="${consultationLink(product, variant, true)}" class="card-quote-link" target="_blank" rel="noopener noreferrer">
+            Consultar quantidade maior
+          </a>
+        ` : ''}
+      </div>
+    </article>
+  `;
 }
 
 // ==========================================================================
-// 6. Product Card Interactions
+/* Product Card Interactions */
 // ==========================================================================
+function updateProductCard(product, variant) {
+  const card = document.getElementById(`card-${product.id}`);
+  if (!card) return;
+
+  card.querySelectorAll('.variant-btn').forEach(button => {
+    const selected = button.dataset.variantId === variant.id;
+    button.classList.toggle('selected', selected);
+    button.setAttribute('aria-pressed', selected);
+  });
+
+  if (variant.price !== undefined) {
+    card.querySelector('.current-price').textContent = formatPrice(priceWithAddons(variant, selectedAddons(product)));
+    card.querySelector('.price-subtext').textContent = priceLabel(product, variant);
+  }
+
+  const note = card.querySelector('.card-order-note');
+  note.textContent = variant.note ?? '';
+  note.hidden = !variant.note;
+
+  const consultation = card.querySelector('.btn-consult-whatsapp');
+  if (consultation) consultation.href = consultationLink(product, variant);
+  const largerOrder = card.querySelector('.card-quote-link');
+  if (largerOrder) largerOrder.href = consultationLink(product, variant, true);
+}
+
 window.selectProductVariant = function(productId, variantId) {
-  AppState.selectedVariants[productId] = variantId;
-
-  const product = CATALOG_PRODUCTS.find(p => p.id === productId);
-  if (!product) return;
-
-  const variant = product.variations.find(v => v.id === variantId);
+  const product = CATALOG_PRODUCTS.find(entry => entry.id === productId);
+  const variant = product?.variations.find(option => option.id === variantId);
   if (!variant) return;
 
-  // Update variant buttons in card
-  const card = document.getElementById(`card-${productId}`);
-  if (card) {
-    const buttons = card.querySelectorAll('.variant-btn');
-    buttons.forEach(btn => {
-      const match = btn.getAttribute('data-variant-id') === variantId;
-      btn.classList.toggle('selected', match);
-    });
+  AppState.selectedVariants[productId] = variantId;
+  updateProductCard(product, variant);
+};
 
-    // Update price display
-    const priceDisplay = document.getElementById(`priceDisplay-${productId}`);
-    if (priceDisplay) {
-      priceDisplay.textContent = product.isConsultation
-        ? 'Sob consulta'
-        : `R$ ${variant.price.toFixed(2).replace('.', ',')}`;
-    }
-  }
+window.toggleProductAddon = function(productId, addonId, checked) {
+  const product = CATALOG_PRODUCTS.find(entry => entry.id === productId);
+  if (!product?.addons?.some(addon => addon.id === addonId)) return;
+
+  const options = AppState.selectedAddons[productId];
+  AppState.selectedAddons[productId] = checked ? [...new Set([...options, addonId])] : options.filter(id => id !== addonId);
+  const variant = product.variations.find(option => option.id === AppState.selectedVariants[productId]);
+  updateProductCard(product, variant);
 };
 
 window.changeProductQty = function(productId, delta) {
   const product = CATALOG_PRODUCTS.find(p => p.id === productId);
   if (!product) return;
 
-  let current = AppState.selectedQuantities[productId] || 1;
-  const min = product.minQuantity > 1 ? product.minQuantity : 1;
-
-  current += delta;
-  if (current < min) current = min;
+  const current = Math.max(1, AppState.selectedQuantities[productId] + delta);
 
   AppState.selectedQuantities[productId] = current;
 
@@ -542,70 +383,67 @@ window.changeProductQty = function(productId, delta) {
 // ==========================================================================
 // 7. Cart Operations
 // ==========================================================================
+function buildCartItem(product, variant, addons, quantity) {
+  return {
+    productId: product.id,
+    variantId: variant.id,
+    variantLabel: variant.label,
+    addonIds: addons.map(addon => addon.id),
+    addonLabels: addons.map(addon => addon.label),
+    title: product.title,
+    image: productImage(product),
+    quantity,
+    isPack: Boolean(packQuantity(product, variant)),
+    price: priceWithAddons(variant, addons)
+  };
+}
+
+function cartItemSubtotal(item) {
+  return item.isPack ? item.price : item.quantity * item.price;
+}
+
 window.addProductToCart = function(productId) {
-  const product = CATALOG_PRODUCTS.find(p => p.id === productId);
+  const product = CATALOG_PRODUCTS.find(entry => entry.id === productId);
   if (!product || product.isConsultation) return;
 
-  const variantId = AppState.selectedVariants[productId] || product.variations[0].id;
-  const variant = product.variations.find(v => v.id === variantId) || product.variations[0];
-  const quantity = AppState.selectedQuantities[productId] || 1;
-
-  // Check if item already in cart with same product and variation
-  const existingItemIndex = AppState.cart.findIndex(
-    item => item.productId === productId && item.variantId === variantId
+  const variant = product.variations.find(option => option.id === AppState.selectedVariants[productId]);
+  const pack = packQuantity(product, variant);
+  const quantity = pack ?? AppState.selectedQuantities[productId];
+  const item = buildCartItem(product, variant, selectedAddons(product), quantity);
+  const existingIndex = AppState.cart.findIndex(entry =>
+    entry.productId === productId && (pack || entry.variantId === variant.id)
   );
 
-  if (existingItemIndex > -1) {
-    AppState.cart[existingItemIndex].quantity += quantity;
+  if (existingIndex < 0) {
+    AppState.cart.push(item);
+  } else if (pack) {
+    AppState.cart[existingIndex] = item;
   } else {
-    AppState.cart.push({
-      productId: product.id,
-      title: product.title,
-      variantId: variant.id,
-      variantLabel: variant.label,
-      unitPrice: variant.price,
-      quantity: quantity,
-      image: product.image,
-      minQuantity: product.minQuantity || 1,
-      minAlert: product.minAlert
-    });
+    AppState.cart[existingIndex].quantity += quantity;
   }
 
-  // Visual button feedback
   const addBtn = document.getElementById(`addBtn-${productId}`);
+  const updated = pack && existingIndex >= 0;
   if (addBtn) {
     addBtn.classList.add('added-feedback');
-    addBtn.innerHTML = '<span>✓ Adicionado!</span>';
+    addBtn.textContent = updated ? '✓ Lote atualizado' : '✓ Adicionado!';
     setTimeout(() => {
       addBtn.classList.remove('added-feedback');
-      addBtn.innerHTML = '<span>+ Adicionar</span>';
+      addBtn.textContent = pack ? 'Adicionar lote' : '+ Adicionar';
     }, 1200);
   }
 
   saveCartToStorage();
   updateCartUI();
-  showToast(`Adicionado: ${quantity}x ${product.title} (${variant.label})`);
+  showToast(`${updated ? 'Lote atualizado' : 'Adicionado'}: ${quantity} × ${product.title}.`);
 };
 
 window.updateCartItemQty = function(index, delta) {
-  if (index < 0 || index >= AppState.cart.length) return;
-
   const item = AppState.cart[index];
-  const min = item.minQuantity > 1 ? item.minQuantity : 1;
+  if (!item || item.isPack) return;
 
   item.quantity += delta;
-
-  if (item.quantity <= 0) {
-    // Remove if zero
-    AppState.cart.splice(index, 1);
-  } else if (item.quantity < min) {
-    // Alert minimum quantity
-    if (confirm(`Atenção: A quantidade mínima para este item é ${min} unidades. Deseja remover o item do carrinho?`)) {
-      AppState.cart.splice(index, 1);
-    } else {
-      item.quantity = min;
-    }
-  }
+  if (item.quantity <= 0) AppState.cart.splice(index, 1);
 
   saveCartToStorage();
   updateCartUI();
@@ -620,24 +458,28 @@ window.removeCartItem = function(index) {
   }
 };
 
-function toggleCartDrawer(open) {
+let cartDrawerTrigger;
+
+function toggleCartDrawer(open, trigger) {
   const drawer = document.getElementById('cartDrawer');
   const overlay = document.getElementById('cartOverlay');
+  const wasOpen = drawer.classList.contains('open');
 
+  drawer.inert = !open;
+  drawer.classList.toggle('open', open);
+  overlay.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
   if (open) {
-    drawer.classList.add('open');
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  } else {
-    drawer.classList.remove('open');
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
+    cartDrawerTrigger = trigger;
+    document.getElementById('closeCartBtn').focus({ preventScroll: true });
+  } else if (wasOpen) {
+    cartDrawerTrigger?.focus({ preventScroll: true });
   }
 }
 
 function updateCartUI() {
   const totalCount = AppState.cart.reduce((sum, item) => sum + item.quantity, 0);
-  const totalPrice = AppState.cart.reduce((sum, item) => sum + (item.quantity * item.unitPrice), 0);
+  const totalPrice = AppState.cart.reduce((sum, item) => sum + cartItemSubtotal(item), 0);
 
   // Update Badges
   document.getElementById('cartBadgeHeader').textContent = totalCount;
@@ -650,8 +492,6 @@ function updateCartUI() {
   const cartFooter = document.getElementById('cartFooter');
   const cartTotalItems = document.getElementById('cartTotalItems');
   const cartTotalPrice = document.getElementById('cartTotalPrice');
-  const minOrderAlert = document.getElementById('minOrderAlert');
-  const minOrderAlertText = document.getElementById('minOrderAlertText');
 
   if (AppState.cart.length === 0) {
     cartItemsList.innerHTML = '';
@@ -666,45 +506,28 @@ function updateCartUI() {
   cartFooter.style.display = 'block';
 
   cartTotalItems.textContent = `${totalCount} ${totalCount === 1 ? 'unidade' : 'unidades'}`;
-  cartTotalPrice.textContent = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
+  cartTotalPrice.textContent = formatPrice(totalPrice);
 
-  // Check for any minimum quantity alerts
-  let minimumWarnings = [];
-  AppState.cart.forEach(item => {
-    if (item.minQuantity > 1 && item.quantity < item.minQuantity) {
-      minimumWarnings.push(`${item.title} exige mínimo de ${item.minQuantity} un. (atual: ${item.quantity})`);
-    }
-  });
-
-  if (minimumWarnings.length > 0) {
-    minOrderAlert.style.display = 'flex';
-    minOrderAlertText.textContent = minimumWarnings.join(' | ');
-  } else {
-    minOrderAlert.style.display = 'none';
-  }
-
-  // Render Items List HTML
-  cartItemsList.innerHTML = AppState.cart.map((item, index) => {
-    const subtotal = item.quantity * item.unitPrice;
-    return `
-      <div class="cart-item">
-        <img src="${item.image}" alt="${item.title}" class="cart-item-thumb">
-        <div class="cart-item-info">
-          <h5 class="cart-item-title">${item.title}</h5>
-          <span class="cart-item-variant">${item.variantLabel}</span>
-          <div class="cart-item-row">
+  cartItemsList.innerHTML = AppState.cart.map((item, index) => `
+    <div class="cart-item">
+      <img src="${item.image}" alt="" class="cart-item-thumb">
+      <div class="cart-item-info">
+        <h5 class="cart-item-title">${item.title}</h5>
+        <span class="cart-item-variant">${[item.variantLabel, ...item.addonLabels].join(' · ')}</span>
+        <div class="cart-item-row">
+          ${item.isPack ? `<span class="cart-item-variant">${item.quantity} unidades</span>` : `
             <div class="cart-item-qty">
-              <button type="button" onclick="updateCartItemQty(${index}, -1)" aria-label="Diminuir">−</button>
+              <button type="button" onclick="updateCartItemQty(${index}, -1)" aria-label="Diminuir quantidade">−</button>
               <span>${item.quantity}</span>
-              <button type="button" onclick="updateCartItemQty(${index}, 1)" aria-label="Aumentar">+</button>
+              <button type="button" onclick="updateCartItemQty(${index}, 1)" aria-label="Aumentar quantidade">+</button>
             </div>
-            <span class="cart-item-price">R$ ${subtotal.toFixed(2).replace('.', ',')}</span>
-            <button type="button" class="btn-remove-item" onclick="removeCartItem(${index})" title="Remover item">🗑️</button>
-          </div>
+          `}
+          <span class="cart-item-price">${formatPrice(cartItemSubtotal(item))}</span>
+          <button type="button" class="btn-remove-item" onclick="removeCartItem(${index})" aria-label="Remover ${item.title}">🗑️</button>
         </div>
       </div>
-    `;
-  }).join('');
+    </div>
+  `).join('');
 }
 
 // ==========================================================================
@@ -726,17 +549,8 @@ function handleWhatsAppCheckout() {
   const eventDate = document.getElementById('eventDate').value;
   const orderNotes = document.getElementById('orderNotes').value.trim();
 
-  // Validate Minimums
-  const invalidItems = AppState.cart.filter(item => item.minQuantity > 1 && item.quantity < item.minQuantity);
-  if (invalidItems.length > 0) {
-    const names = invalidItems.map(i => `${i.title} (mínimo ${i.minQuantity} un.)`).join('\n• ');
-    if (!confirm(`Atenção para o pedido mínimo dos itens:\n• ${names}\n\nDeseja prosseguir mesmo assim para consultar com a Sandra?`)) {
-      return;
-    }
-  }
-
   const totalCount = AppState.cart.reduce((sum, item) => sum + item.quantity, 0);
-  const totalPrice = AppState.cart.reduce((sum, item) => sum + (item.quantity * item.unitPrice), 0);
+  const totalPrice = AppState.cart.reduce((sum, item) => sum + cartItemSubtotal(item), 0);
 
   // Format date if provided
   let dateFormatted = '';
@@ -747,7 +561,7 @@ function handleWhatsAppCheckout() {
 
   // Build Structured WhatsApp Text Message
   let message = `🍿 *NOVO PEDIDO — PIPOCAS LEÃO GOURMET*\n`;
-  message += `Olá Sandra! Gostaria de fazer o seguinte pedido pelo Catálogo 2025:\n\n`;
+  message += `Olá Sandra! Gostaria de fazer o seguinte pedido pelo Catálogo ${CATALOG_YEAR}:\n\n`;
   message += `👤 *Cliente:* ${customerName}\n`;
   if (dateFormatted) {
     message += `📅 *Data do Evento/Entrega:* ${dateFormatted}\n`;
@@ -755,81 +569,81 @@ function handleWhatsAppCheckout() {
   message += `\n🛒 *ITENS SELECIONADOS:*\n`;
 
   AppState.cart.forEach((item, i) => {
-    const subtotal = item.quantity * item.unitPrice;
-    message += `${i + 1}. *${item.quantity}x* ${item.title} — _${item.variantLabel}_\n`;
-    message += `   Valor: R$ ${subtotal.toFixed(2).replace('.', ',')} (R$ ${item.unitPrice.toFixed(2).replace('.', ',')} un.)\n`;
+    message += `${i + 1}. *${item.quantity} ×* ${item.title} — _${item.variantLabel}_\n`;
+    if (item.addonLabels.length) message += `   Adicionais: ${item.addonLabels.join(', ')}\n`;
+    message += `   Valor: ${formatPrice(cartItemSubtotal(item))}${item.isPack ? ' pelo lote' : ` (${formatPrice(item.price)} un.)`}\n`;
   });
 
   message += `\n📊 *Total de Itens:* ${totalCount} un.`;
-  message += `\n💰 *Total Estimado:* R$ ${totalPrice.toFixed(2).replace('.', ',')}\n`;
+  message += `\n💰 *Total Estimado:* ${formatPrice(totalPrice)}\n`;
 
   if (orderNotes) {
     message += `\n📝 *Sabores / Observações:*\n${orderNotes}\n`;
   }
 
-  message += `\n💳 *Forma de Pagamento:* A combinar (Pix / Cartão / Transferência)`;
+  message += `\n💳 *Forma de Pagamento:* A combinar (Dinheiro / Pix / Depósito / Transferência / Cartão)`;
   message += `\n\nMuito obrigado! Aguardo a confirmação do pedido. ✨`;
 
-  const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
-  
-  // Open WhatsApp in a new tab
-  window.open(whatsappUrl, '_blank');
+  window.open(whatsappLink(message), '_blank', 'noopener,noreferrer');
 }
 
 // ==========================================================================
 // 9. Product Details Modal
 // ==========================================================================
-window.openProductDetailsModal = function(productId) {
-  const product = CATALOG_PRODUCTS.find(p => p.id === productId);
+window.openProductDetailsModal = function(productId, trigger) {
+  const product = CATALOG_PRODUCTS.find(entry => entry.id === productId);
   if (!product) return;
 
   const modalBody = document.getElementById('productModalBody');
-  const overlay = document.getElementById('productModalOverlay');
+  const dialog = document.getElementById('productModalOverlay');
+  const variant = product.variations.find(option => option.id === AppState.selectedVariants[productId]);
+  const pack = packQuantity(product, variant);
+  const notes = [...(product.notes ?? [])];
+  if (pack) notes.push(PACK_QUOTE);
 
   modalBody.innerHTML = `
     <div class="modal-product-header">
-      <img src="${product.image}" alt="${product.title}" class="modal-product-thumb">
+      <img src="${productImage(product)}" alt="" class="modal-product-thumb">
       <div>
-        <h4 class="modal-product-title">${product.emoji} ${product.title}</h4>
+        <h3 class="modal-product-title" id="productModalTitle">${product.title}</h3>
         <p class="modal-product-size">${product.sizeLabel}</p>
-        <span class="card-badge-category" style="position: static; display: inline-block; margin-top: 6px;">${product.category}</span>
       </div>
     </div>
-
-    <h5 class="modal-section-title">Descrição do Produto</h5>
-    <p class="modal-desc-text">${product.description}</p>
-
-    <h5 class="modal-section-title">Sabores e Apresentação</h5>
-    <p class="modal-desc-text">${product.flavorsHint}</p>
-
-    <div class="modal-specs-list">
-      <div class="modal-spec-row">
-        <strong>Opções & Preços:</strong>
-        <span>${product.variations.map(v => `${v.label} (R$ ${v.price.toFixed(2).replace('.', ',')})`).join(' | ')}</span>
-      </div>
-      ${product.minQuantity > 1 ? `
+    ${product.description ? `<p class="modal-desc-text">${product.description}</p>` : ''}
+    ${notes.length ? `<ul class="modal-product-notes">${notes.map(note => `<li>${note}</li>`).join('')}</ul>` : ''}
+    <dl class="modal-specs-list">
+      ${product.variations.map(option => `
         <div class="modal-spec-row">
-          <strong>Pedido Mínimo:</strong>
-          <span style="color: var(--pink-primary); font-weight: 700;">${product.minQuantity} unidades</span>
+          <dt>${option.label}</dt>
+          <dd>${option.price === undefined ? 'Sob consulta' : `<span class="price-inline">${formatPrice(option.price)}</span> · ${priceLabel(product, option)}`}${option.note ? `<br>${option.note}` : ''}</dd>
         </div>
+      `).join('')}
+      ${(product.addons ?? []).map(addon => `
+        <div class="modal-spec-row"><dt>${addon.label} (opcional)</dt><dd class="price-inline">+ ${formatPrice(addon.price)}</dd></div>
+      `).join('')}
+    </dl>
+    <div class="modal-product-actions">
+      ${product.instagram ? `
+        <a class="btn btn-teal-outline btn-sm" href="https://instagram.com/${product.instagram}" target="_blank" rel="noopener noreferrer">
+          @${product.instagram}
+        </a>
       ` : ''}
-      <div class="modal-spec-row">
-        <strong>Produção:</strong>
-        <span>Artesanal sob encomenda</span>
-      </div>
-    </div>
-
-    <div style="display: flex; gap: 12px; justify-content: flex-end;">
-      <button type="button" class="btn btn-teal-outline btn-sm" onclick="document.getElementById('productModalOverlay').classList.remove('open')">
-        Fechar
-      </button>
-      <button type="button" class="btn btn-teal btn-sm" onclick="document.getElementById('productModalOverlay').classList.remove('open'); addProductToCart('${product.id}')">
-        + Adicionar ao Carrinho
-      </button>
+      ${product.isConsultation || pack ? `
+        <a class="btn ${pack ? 'btn-teal-outline' : 'btn-teal'} btn-sm" href="${consultationLink(product, variant, Boolean(pack))}" target="_blank" rel="noopener noreferrer">
+          ${pack ? 'Consultar quantidade maior' : 'Consultar pelo WhatsApp'}
+        </a>
+      ` : ''}
+      ${product.isConsultation ? '' : `
+        <button type="button" class="btn btn-teal btn-sm" data-add-product>${pack ? 'Adicionar lote' : 'Adicionar ao carrinho'}</button>
+      `}
     </div>
   `;
 
-  overlay.classList.add('open');
+  modalBody.querySelector('[data-add-product]')?.addEventListener('click', () => {
+    closeCatalogDialog(dialog);
+    addProductToCart(product.id);
+  });
+  openCatalogDialog(dialog, trigger);
 };
 
 // ==========================================================================
@@ -837,7 +651,10 @@ window.openProductDetailsModal = function(productId) {
 // ==========================================================================
 function saveCartToStorage() {
   try {
-    localStorage.setItem('pipocas_leao_cart', JSON.stringify(AppState.cart));
+    const entries = AppState.cart.map(({ productId, variantId, addonIds, quantity }) => ({
+      productId, variantId, addonIds, quantity
+    }));
+    localStorage.setItem('pipocas_leao_cart', JSON.stringify(entries));
   } catch (e) {
     console.warn('LocalStorage error:', e);
   }
@@ -845,9 +662,30 @@ function saveCartToStorage() {
 
 function loadCartFromStorage() {
   try {
-    const saved = localStorage.getItem('pipocas_leao_cart');
-    if (saved) {
-      AppState.cart = JSON.parse(saved);
+    const entries = JSON.parse(localStorage.getItem('pipocas_leao_cart'));
+    if (!Array.isArray(entries)) return;
+
+    let changed = false;
+    for (const entry of entries) {
+      const product = CATALOG_PRODUCTS.find(item => item.id === entry?.productId);
+      const variant = product?.variations.find(option => option.id === entry.variantId);
+      const pack = variant && packQuantity(product, variant);
+      if (!variant || product.isConsultation || !Number.isSafeInteger(entry.quantity) || entry.quantity < 1 ||
+        (pack && (entry.quantity !== pack || AppState.cart.some(item => item.productId === product.id)))) {
+        changed = true;
+        continue;
+      }
+
+      const savedAddons = Array.isArray(entry.addonIds) ? entry.addonIds : [];
+      const addons = (product.addons ?? []).filter(addon => savedAddons.includes(addon.id));
+      AppState.cart.push(buildCartItem(product, variant, addons, entry.quantity));
+      if ('unitPrice' in entry || addons.length !== savedAddons.length) changed = true;
+    }
+
+    if (changed) {
+      saveCartToStorage();
+      document.getElementById('cartCatalogNotice').hidden = false;
+      showToast('O catálogo foi atualizado. Revise seu carrinho.');
     }
   } catch (e) {
     console.warn('LocalStorage error:', e);
